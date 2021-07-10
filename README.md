@@ -5,12 +5,14 @@
 - [x] Setup server with typescript and typeorm
 - [x] Setup postgres
 - [x] Setup docker and compose for orchestration
+- [x] All interfaces
 - [x] User model
 - [ ] All routes
   - [x] Login
   - [ ] get data
   - [ ] submit
   - [ ] autocomplete
+    - [ ] prevent entering non-farsi chars
 - [ ] Error management
 - [ ] Logger
 - [ ] Category model
@@ -25,9 +27,3 @@
 - [ ] RTL
 - [ ] XD
 - [ ] XD to React
-
-### Steps to run this project
-
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
