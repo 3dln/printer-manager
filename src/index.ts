@@ -1,20 +1,33 @@
+import express, { Request, Response } from 'express';
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+
 import { User } from "./entity/User";
 import { UserRole } from './interfaces/user';
 
-createConnection().then(async connection => {
+// Main application
+const app = express();
+app.use(express.json());
 
-    // Predefined data
-    console.log("Inserting a new user into the database...");
-    const user = new User();
+// Create
+app.post('/users', async (req: Request, res: Response) => {
+    const { name, mobile } = req.body;
+    try {
+        const user = User.create({ name, mobile });
+        await user.save();
+        return res.status(201).json(user);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json(error);
+    }
+});
+// Read
+// Update
+// Delete
+// Find
 
-    user.name = "کیارش مظفری";
-    user.mobile = "09123456789";
-    user.role = UserRole.ADMIN;
+createConnection()
+    .then(async () => {
+        app.listen(5000, () => console.log(`Server is running at http://localhost:5000`));
 
-    await user.save();
-
-    console.log("Saved a new user with id: " + user.id);
-
-}).catch(error => console.log(error));
+    }).catch(error => console.log(error));

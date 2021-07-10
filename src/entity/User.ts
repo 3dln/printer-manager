@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    BaseEntity,
+    CreateDateColumn,
+    UpdateDateColumn
+} from "typeorm";
 import IUser, { UserRole } from './../interfaces/user';
 
 @Entity('users')
@@ -49,4 +56,10 @@ export class User extends BaseEntity implements IUser {
 
     @Column({ default: 0 })
     walletDeposit: number;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }
