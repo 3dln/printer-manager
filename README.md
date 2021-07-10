@@ -4,12 +4,20 @@
 
 - [x] Setup server with typescript and typeorm
 - [x] Setup postgres
-- [ ] Login
-- [ ] User model
+- [x] Setup docker and compose for orchestration
+- [x] User model
+- [ ] All routes
+  - [x] Login
+  - [ ] get data
+  - [ ] submit
+  - [ ] autocomplete
+- [ ] Error management
+- [ ] Logger
 - [ ] Category model
 - [ ] product model
 - [ ] Cart model
 - [ ] Order model
+- [ ] Login
 - [ ] Get Printers
 - [ ] Define Printers
 - [ ] Next.js
