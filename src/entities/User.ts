@@ -6,7 +6,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn
 } from "typeorm";
-import IUser, { UserRole } from './../interfaces/user';
+import IUser, { UserRole } from '../interfaces/user';
 
 @Entity('users')
 export class User extends BaseEntity implements IUser {
@@ -62,4 +62,19 @@ export class User extends BaseEntity implements IUser {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    toJSON() {
+        return {
+            ...this,
+            username: undefined,
+            email: undefined,
+            password: undefined,
+            streetAddress: undefined,
+            apartmentNumber: undefined,
+            city: undefined,
+            zipCode: undefined,
+            state: undefined,
+            walletDeposit: undefined
+        };
+    }
 }
