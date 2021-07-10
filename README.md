@@ -2,12 +2,14 @@
 
 ## TODO
 
-- [ ] Setup server with typescript and typeorm
-- [ ] Setup sqlite
+- [x] Setup server with typescript and typeorm
+- [x] Setup postgres
 - [ ] Login
+- [ ] User model
 - [ ] Category model
 - [ ] product model
 - [ ] Cart model
+- [ ] Order model
 - [ ] Get Printers
 - [ ] Define Printers
 - [ ] Next.js
