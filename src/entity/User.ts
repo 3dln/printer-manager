@@ -1,18 +1,52 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import IUser, { UserRole } from './../interfaces/user';
 
-@Entity()
-export class User {
+@Entity('users')
+export class User extends BaseEntity implements IUser {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
-    @Column()
-    firstName: string;
+    @Column({ unique: true, nullable: true, type: 'varchar', length: 64 })
+    username: string;
 
-    @Column()
-    lastName: string;
+    @Column({ unique: true, nullable: true, length: 256 })
+    email: string;
 
-    @Column()
-    age: number;
+    @Column({ nullable: true, length: 64 })
+    password: string;
 
+    @Column({ type: "varchar", length: 128 })
+    name: string;
+
+    @Column({ unique: true })
+    mobile: string;
+
+    @Column({ default: "users/default.png" })
+    image: string;
+
+    @Column({ nullable: true, type: "varchar", length: 128 })
+    streetAddress: string;
+
+    @Column({ nullable: true, type: "varchar", length: 20 })
+    apartmentNumber: string;
+
+    @Column({ nullable: true, type: "varchar", length: 50 })
+    city: string;
+
+    @Column({ nullable: true, type: "varchar", length: 50 })
+    state: string;
+
+    @Column({ nullable: true, type: "varchar", length: 10 })
+    zipCode: string;
+
+    @Column({
+        type: "enum",
+        enum: UserRole,
+        default: UserRole.CLIENT
+    })
+    role: UserRole;
+
+    @Column({ default: 0 })
+    walletDeposit: number;
 }

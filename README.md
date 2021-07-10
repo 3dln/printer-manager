@@ -2,9 +2,12 @@
 
 ## TODO
 
-- [ ] Categories
-- [ ] Items
-- [ ] Cart
+- [ ] Setup server with typescript and typeorm
+- [ ] Setup sqlite
+- [ ] Login
+- [ ] Category model
+- [ ] product model
+- [ ] Cart model
 - [ ] Get Printers
 - [ ] Define Printers
 - [ ] Next.js
