@@ -1,8 +1,10 @@
 // node.js
 import express, { Request, Response } from 'express';
-// typeorm
+
+// 3rd parties
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import morgan from 'morgan';
 
 // Application
 import { User } from "./entities/User";
@@ -10,6 +12,11 @@ import { User } from "./entities/User";
 // Main application
 const app = express();
 app.use(express.json());
+app.use(morgan('dev'));
+
+app.get('/', (req: Request, res: Response) => {
+    res.json('Hello there');
+});
 
 // Create
 // TODO: this have to get moved to it's separate route handler file
@@ -38,10 +45,12 @@ app.get('/users', async (req: Request, res: Response) => {
 // Delete
 // Find
 
-// listening to the port right after connection to the database created
-createConnection()
-    .then(async () => {
-        // TODO: port and address should get read from environment variables
-        app.listen(5000, () => console.log(`Server is running at http://localhost:5000`));
-
-    }).catch(error => console.log(error));
+app.listen(5000, async () => {
+    console.log(`Server started`);
+    try {
+        await createConnection();
+        console.log(`Database connected`);
+    } catch (err) {
+        console.log(err);
+    }
+});
