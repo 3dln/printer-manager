@@ -1,26 +1,16 @@
-import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    BaseEntity,
-    CreateDateColumn,
-    UpdateDateColumn,
-    Index,
-} from "typeorm";
-import { IsEmail, Length } from "class-validator";
+import { Entity as TOEntity, Column, Index } from "typeorm";
+import { IsEmail, IsPhoneNumber, Length } from "class-validator";
+import { Exclude } from "class-transformer";
 
 import IUser, { UserRole } from "../interfaces/user";
-import { classToPlain, Exclude } from "class-transformer";
+import Entity from "./Entity";
 
-@Entity("users")
-export class User extends BaseEntity implements IUser {
+@TOEntity("users")
+export class User extends Entity implements IUser {
     constructor(user: Partial<User>) {
         super();
         Object.assign(this, user);
     }
-
-    @PrimaryGeneratedColumn()
-    id: string;
 
     @Column({ unique: true, nullable: true, type: "varchar", length: 64 })
     username: string;
@@ -39,7 +29,7 @@ export class User extends BaseEntity implements IUser {
     name: string;
 
     @Index()
-    // @ispho()
+    @IsPhoneNumber("IR")
     @Column({ unique: true })
     mobile: string;
 
@@ -70,14 +60,4 @@ export class User extends BaseEntity implements IUser {
 
     @Column({ default: 0 })
     walletDeposit: number;
-
-    @CreateDateColumn()
-    createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
-
-    toJSON() {
-        return classToPlain(this);
-    }
 }
