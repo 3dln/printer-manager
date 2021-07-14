@@ -9,14 +9,16 @@ import morgan from "morgan";
 // application
 import trim from "./middlewares/trim";
 import authRoutes from "./routes/auth";
+import { getPrinters } from 'printer';
 
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(trim);
 
-app.get("/", (_, res) => {
-    res.json("Hello there");
+app.get("/printers", (_, res) => {
+    let printers = getPrinters();
+    res.json({ printers });
 });
 app.use("/api/auth", authRoutes);
 

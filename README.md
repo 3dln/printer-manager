@@ -1,5 +1,22 @@
 # A Node.js project which handles orders of a restaurant and sends bills to different printers
 
+## Steps to run this project
+
+### dev
+
+- database
+  - docker run -itd -p 5432:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_USER=postgres -e POSTGRES_DB=cafe_db postgres
+- app
+  - npm run dev
+
+### production
+
+- Install docker for windows
+- clone this repo
+- cd into cloned directory
+- git submodule update --init --recursive
+- docker-compose up -d
+
 ## TODO
 
 - [x] Setup server with typescript and typeorm
@@ -9,28 +26,26 @@
 - [x] User model
 - [ ] All routes
   - [x] Login
-  - [ ] get data
+  - [x] get data
   - [ ] submit
   - [ ] autocomplete
     - [ ] prevent entering farsi chars
-- [ ] Error management
+- [x] Error management
 - [ ] Logger
   - [x] api logger (morgan)
   - [ ] main logger (winston)
 - [x] middlewares
 - [x] validation
-- [ ] Category model
-- [ ] product model
+- [x] Category model
+- [x] product model
 - [ ] Cart model
 - [ ] Order model
-- [ ] Login
-- [ ] Get Printers
+- [x] Login
+- [x] Get Printers
 - [ ] Define Printers
-- [ ] Next.js
-- [ ] Fonts
-- [ ] RTL
-- [ ] XD
-- [ ] XD to React
+- [x] Next.js
+- [x] Fonts
+- [x] RTL
 - [ ] Single source of truth architecture for offline mode
   - [ ] Save received info from server into client db
   - [ ] Client db is our single source of truth
