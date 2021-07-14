@@ -4,28 +4,42 @@ import {
     Column,
     BaseEntity,
     CreateDateColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
+    Index,
 } from "typeorm";
-import IUser, { UserRole } from '../interfaces/user';
+import { IsEmail, Length } from "class-validator";
 
-@Entity('users')
+import IUser, { UserRole } from "../interfaces/user";
+import { classToPlain, Exclude } from "class-transformer";
+
+@Entity("users")
 export class User extends BaseEntity implements IUser {
+    constructor(user: Partial<User>) {
+        super();
+        Object.assign(this, user);
+    }
 
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: string;
 
-    @Column({ unique: true, nullable: true, type: 'varchar', length: 64 })
+    @Column({ unique: true, nullable: true, type: "varchar", length: 64 })
     username: string;
 
+    @IsEmail()
     @Column({ unique: true, nullable: true, length: 256 })
     email: string;
 
+    @Exclude()
     @Column({ nullable: true, length: 64 })
     password: string;
 
+    @Length(3, 256, { message: "Name must be at least 3 characters long" })
+    @Index()
     @Column({ type: "varchar", length: 128 })
     name: string;
 
+    @Index()
+    // @ispho()
     @Column({ unique: true })
     mobile: string;
 
@@ -50,7 +64,7 @@ export class User extends BaseEntity implements IUser {
     @Column({
         type: "enum",
         enum: UserRole,
-        default: UserRole.CLIENT
+        default: UserRole.CLIENT,
     })
     role: UserRole;
 
@@ -64,17 +78,6 @@ export class User extends BaseEntity implements IUser {
     updatedAt: Date;
 
     toJSON() {
-        return {
-            ...this,
-            username: undefined,
-            email: undefined,
-            password: undefined,
-            streetAddress: undefined,
-            apartmentNumber: undefined,
-            city: undefined,
-            zipCode: undefined,
-            state: undefined,
-            walletDeposit: undefined
-        };
+        return classToPlain(this);
     }
 }

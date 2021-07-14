@@ -12,7 +12,7 @@
   - [ ] get data
   - [ ] submit
   - [ ] autocomplete
-    - [ ] prevent entering non-farsi chars
+    - [ ] prevent entering farsi chars
 - [ ] Error management
 - [ ] Logger
 - [ ] Category model
@@ -27,3 +27,15 @@
 - [ ] RTL
 - [ ] XD
 - [ ] XD to React
+- [ ] Single source of truth architecture for offline mode
+  - [ ] Save received info from server into client db
+  - [ ] Client db is our single source of truth
+  - [ ] Client db needs to get synced with server's db periodically
+  - [ ] Check for internet connection availability
+  - [ ] Sync menu items and customer data
+    - [ ] When internet becomes available
+    - [ ] On a regular basis (like every hour)
+  - [ ] Error Handling
+    - [ ] Server access is not available
+    - [ ] Client db is not accessible
+    - [ ] Syncing errors
