@@ -15,6 +15,10 @@
     - [ ] prevent entering farsi chars
 - [ ] Error management
 - [ ] Logger
+  - [x] api logger (morgan)
+  - [ ] main logger (winston)
+- [x] middlewares
+- [x] validation
 - [ ] Category model
 - [ ] product model
 - [ ] Cart model
