@@ -1,5 +1,5 @@
 // node.js
-import express, { Request, Response } from "express";
+import express from "express";
 
 // 3rd parties
 import "reflect-metadata";

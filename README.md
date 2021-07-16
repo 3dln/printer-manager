@@ -42,7 +42,7 @@
 - [ ] Order model
 - [x] Login
 - [x] Get Printers
-- [ ] Define Printers
+- [x] Define Printers
 - [x] Next.js
 - [x] Fonts
 - [x] RTL
