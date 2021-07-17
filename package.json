@@ -8,10 +8,14 @@
   },
   "description": "A printer manager application for a restaurant which sends customer orders to different printers in the house ",
   "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/del": "^4.0.0",
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
+    "@types/multer": "^1.4.7",
     "@types/node": "^16.3.1",
     "@types/printer": "^0.4.1",
+    "@types/request": "^2.48.6",
     "nodemon": "^2.0.11",
     "rimraf": "^3.0.2",
     "ts-node": "^10.1.0",
@@ -20,11 +24,16 @@
   "dependencies": {
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+    "cors": "^2.8.5",
+    "del": "^6.0.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "pdf-to-printer": "^2.0.6",
     "pg": "^8.6.0",
     "printer": "^0.4.0",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
     "typeorm": "^0.2.34"
   },
   "scripts": {

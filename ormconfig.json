@@ -6,7 +6,7 @@
   "password": "root",
   "database": "cafe_db",
   "client_encoding": "utf8",
-  "synchronize": true,
+  "synchronize": false,
   "logging": true,
   "entities": ["**/entities/**/*{.js,.ts}"],
   "migrations": ["**/migrations/**/*{.js,.ts}"],
