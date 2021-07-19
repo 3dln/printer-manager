@@ -25,6 +25,6 @@ COPY ./ormconfig.json ./
 RUN npm install --global pm2
 USER nodejs
 
-EXPOSE 3000
+EXPOSE 5000
 CMD [ "pm2-runtime", "start", "npm", "--", "start" ]
 
