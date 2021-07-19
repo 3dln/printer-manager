@@ -27,6 +27,7 @@
     "cors": "^2.8.5",
     "del": "^6.0.0",
     "express": "^4.17.1",
+    "html-pdf-node": "^1.0.7",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "pdf-to-printer": "^2.0.6",

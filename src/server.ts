@@ -8,11 +8,12 @@ import "reflect-metadata";
 import ptp from "pdf-to-printer";
 import morgan from "morgan";
 import cors from "cors";
+import html_to_pdf from "html-pdf-node";
 
 // application
 import trim from "./middlewares/trim";
 import authRoutes from "./routes/auth";
-import { saveFile } from "./helpers/downloader";
+import { printSavedFile } from "./helpers/printer";
 
 const app = express();
 
@@ -27,14 +28,27 @@ app.get("/getprinters", (_, res) => {
 });
 
 app.post("/print", async (req, res) => {
-    const printer = req.body.printer;
-    const billUrl = req.body.billUrl;
+    const printers = req.body.printers;
+    const billUrl = req.body.printers[0].page;
     const orderId = req.body.orderId;
     const filePath = path.join(__dirname, "bills", `${orderId}.pdf`);
-    if (!fs.existsSync(filePath))
-        saveFile(billUrl, filePath, printer)
-            .then((resp) => res.json({ success: true }))
-            .catch((err) => res.status(500).json({ success: false }));
+
+    html_to_pdf
+        .generatePdf({ url: billUrl }, { format: "A4" })
+        .then((pdfBuffer: Buffer) => {
+            fs.writeFile(filePath, pdfBuffer, (err) => {
+                if (err) {
+                    return res.status(500).json({ success: false });
+                }
+                printSavedFile(printers, filePath)
+                    .then(() => {
+                        return res.json({ success: true });
+                    })
+                    .catch(() => {
+                        return res.status(500).json({ success: false });
+                    });
+            });
+        });
 });
 
 app.use("/api/auth", authRoutes);

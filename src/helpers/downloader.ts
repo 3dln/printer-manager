@@ -1,8 +1,7 @@
 import http from "http";
-import request from "request";
 import fs from "fs";
-import path from "path";
-import ptp from "pdf-to-printer";
+import { printSavedFile } from "./printer";
+import IPrinter from "../interfaces/printer";
 
 export const getFile = (url: string) => {
     return new Promise((resolve, reject) => {
@@ -28,20 +27,14 @@ export const getFile = (url: string) => {
     });
 };
 
-export const saveFile = (url: string, _path: string, printer: string) => {
-    return new Promise((resolve, reject) => {
+export const saveFile = (url: string, _path: string, printers: IPrinter[]) => {
+    return new Promise((resolve, _) => {
         const file = fs.createWriteStream(_path);
         http.get(url, function (response) {
             response.pipe(file);
-
-            const options = {
-                printer,
-                unix: ["-o fit-to-page"],
-                win32: ['-print-settings "fit"'],
-            };
-            ptp.print(_path, options)
-                .then((resp) => resolve(resp))
-                .catch((err) => reject(err));
+            printSavedFile(printers, _path).then((resp) => {
+                resolve(resp);
+            });
         });
     });
 };
