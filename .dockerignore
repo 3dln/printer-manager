@@ -40,3 +40,4 @@ kubernetes
 **/.aws
 **/dist
 **/build
+**/bills/*
