@@ -76,18 +76,18 @@ app.post("/print", async (req, res) => {
             }
         )
         .then(() => {
-            return res.json({ success: false });
+            // return res.json({ success: false });
             // fs.writeFile(filePath, pdfBuffer, (err) => {
             //     if (err) {
             //         return res.status(500).json({ success: false });
             //     }
-            // printSavedFile(printers, filePath)
-            //     .then(() => {
-            //         return res.json({ success: true });
-            //     })
-            //     .catch(() => {
-            //         return res.status(500).json({ success: false });
-            //     });
+            printSavedFile(printers, filePath)
+                .then(() => {
+                    return res.json({ success: true });
+                })
+                .catch(() => {
+                    return res.status(500).json({ success: false });
+                });
         });
 });
 
