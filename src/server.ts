@@ -47,15 +47,24 @@ app.get("/getprinters", (_, res) => {
 app.post("/print", async (req, res) => {
     const printers = req.body.printers;
     const billUrl = req.body.printers[0].page;
+    const totalItems = req.body.totalItems;
+    // const billUrl = path.join(__dirname, "statics", "print.htm");
     const orderId = req.body.orderId;
     const filePath = path.join(__dirname, "bills", `${orderId}.pdf`);
+    let pdfHeight = 200;
+    if (totalItems > 1) {
+        pdfHeight += (totalItems - 1) * 15;
+    }
 
     html_to_pdf
         .generatePdf(
             { url: billUrl },
             {
-                format: "A5",
+                // format: "A5",
+                width: "148mm",
+                height: `${pdfHeight}mm`,
                 scale: 2,
+                // pageRanges: "1-1",
                 margin: {
                     top: "1cm",
                     bottom: "1cm",
@@ -67,18 +76,18 @@ app.post("/print", async (req, res) => {
             }
         )
         .then(() => {
-            // return res.json({ success: true });
+            return res.json({ success: false });
             // fs.writeFile(filePath, pdfBuffer, (err) => {
             //     if (err) {
             //         return res.status(500).json({ success: false });
             //     }
-            printSavedFile(printers, filePath)
-                .then(() => {
-                    return res.json({ success: true });
-                })
-                .catch(() => {
-                    return res.status(500).json({ success: false });
-                });
+            // printSavedFile(printers, filePath)
+            //     .then(() => {
+            //         return res.json({ success: true });
+            //     })
+            //     .catch(() => {
+            //         return res.status(500).json({ success: false });
+            //     });
         });
 });
 
