@@ -53,9 +53,9 @@ app.post("/print", async (req, res) => {
     const totalItems = req.body.totalItems;
     // const billUrl = path.join(__dirname, "statics", "print.htm");
     // console.log(JSON.stringify(printers));
-    ConvertAll(printers, totalItems, orderId);
-
-    res.json({ success: false });
+    ConvertAll(printers, totalItems, orderId).then((results) => {
+        return res.json({ success: true });
+    });
 });
 
 // app.use("/api/auth", authRoutes);

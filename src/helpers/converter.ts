@@ -20,9 +20,14 @@ export const ConvertAll = (
         });
     });
 
-    Promise.all(promises).then((results) => {
-        // console.log(results);
-    });
+    return Promise.all(promises)
+        .then((results: IConvertResult[]) => {
+            // console.log(results);
+            return results;
+        })
+        .catch((err) => {
+            return null;
+        });
 };
 
 export const ConvertToPDF = (
