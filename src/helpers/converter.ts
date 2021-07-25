@@ -36,12 +36,12 @@ export const ConvertToPDF = (
     orderId: string,
     printerId: string
 ) => {
+    console.log(billUrl);
     // Dynamic height for thermal printer
     let pdfHeight = 200;
     if (totalItems > 1) {
-        pdfHeight += (totalItems - 1) * 15;
+        pdfHeight += (totalItems - 1) * 18;
     }
-
     const filePath = path.join(
         __dirname,
         "..",
@@ -71,18 +71,6 @@ export const ConvertToPDF = (
             )
             .then(() => {
                 resolve({ orderId, printerId, filePath });
-                // return res.json({ success: false });
-                // fs.writeFile(filePath, pdfBuffer, (err) => {
-                //     if (err) {
-                //         return res.status(500).json({ success: false });
-                //     }
-                // printSavedFile(printers, filePath)
-                //     .then(() => {
-                //         return res.json({ success: true });
-                //     })
-                //     .catch(() => {
-                //         return res.status(500).json({ success: false });
-                //     });
             });
     });
 };
