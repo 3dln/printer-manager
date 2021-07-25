@@ -1,19 +1,14 @@
 import ptp from "pdf-to-printer";
 import IPrinter from "../interfaces/printer";
-export const printSavedFile = (printers: IPrinter[], _path: string) => {
-    return new Promise((resolve, _) => {
-        let errors = [];
-        let result = [];
-        printers.forEach((printer) => {
-            const options = {
-                pritner: printer.name,
-                unix: ["-o fit-to-page"],
-                win32: ['-print-settings "fit"'],
-            };
-            ptp.print(_path, options)
-                .then((resp) => result.push(resp))
-                .catch((err) => errors.push(err))
-                .finally(() => resolve([errors, result]));
-        });
+export const printSavedFile = (printer: string, filePath: string) => {
+    return new Promise((resolve, reject) => {
+        const options = {
+            pritner: printer,
+            unix: [],
+            win32: ['-print-settings "noscale"'],
+        };
+        ptp.print(filePath, options)
+            .then((resp) => resolve(resp))
+            .catch((err) => reject(err));
     });
 };
