@@ -3,6 +3,11 @@ import { printSavedFile } from "./printer";
 import path from "path";
 import IPrinter from "../interfaces/printer";
 import IConvertResult from "../interfaces/convert";
+import {
+    getPrintHeight,
+    getPrintScale,
+    getPrintWidth,
+} from "../utils/bxllabel";
 
 export const ConvertAll = (
     printers: IPrinter[],
@@ -49,19 +54,16 @@ export const ConvertToPDF = (
         `${orderId}-${printerId}.pdf`
     );
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _) => {
         html_to_pdf
             .generatePdf(
                 { url: billUrl },
                 {
-                    // format: "A5",
-                    width: "148mm",
-                    height: `${pdfHeight}mm`,
-                    scale: 2,
-                    // pageRanges: "1-1",
+                    width: getPrintWidth(),
+                    height: getPrintHeight(),
+                    scale: getPrintScale(),
                     margin: {
-                        top: "1cm",
-                        bottom: "1cm",
+                        top: "0cm",
                         left: "1cm",
                         right: "1cm",
                     },
